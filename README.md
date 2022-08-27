@@ -30,4 +30,5 @@ A couple of patches created to understand various objects in Pure Data.
 - [Sound Simulator - Pure Data Tutorial #3 - Subtractive Synth, Low-Pass, High-Pass, Band-pass Filters](https://www.youtube.com/watch?v=FVYkQFP1_D4)
 - [Sound Simulator - Pure Data Tutorial #4 - Attack-Decay-Sustain-Release Envelope](https://www.youtube.com/watch?v=W7Pp-DhMA_E)
 - [Pd for Airports](https://www.youtube.com/watch?v=7sTrn39TT7k)
+- [Pure Data - Subpatches](https://www.youtube.com/watch?v=6BfC6ovRRPs)
 

@@ -1,0 +1,108 @@
+#N canvas 1060 135 960 984 12;
+#X obj 300 197 adc~;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array array1 100 float 5;
+#A 0 -0.452891 -0.556253 -0.254505 -0.732263 -0.466035 -0.129539 -1.04752
+0.0047516 -0.690042 -0.67254 -0.00411685 -0.695049 -0.773961 -0.0612933
+-0.795845 -0.497777 -0.278667 -1.0093 0.253491 -0.686131 -0.278734
+-0.981574 0.128676 -0.723788 0.0509062 -0.522602 -0.886281 0.060905
+-0.681859 -0.391098 -0.0537183 -0.924378 -0.172213 -0.360914 -0.87734
+0.450698 -0.523568 -0.560536 -0.0594177 -0.377845 -0.250629 -0.251428
+-0.196793 -0.559333 0.136908 -0.544717 -0.00429708 -0.297225 -0.364235
+0.168417 -0.627776 -0.317691 0.558227 -0.365341 -0.122916 0.474283
+0.126985 0.118909 0.644671 -0.276195 0.396318 0.57635 -0.144257 1.289
+-0.152575 0.81482 0.77096 0.510625 0.854425 0.348279 0.685941 0.893837
+0.528244 0.651497 0.76843 0.831184 0.685994 1.02412 0.484099 0.829636
+0.633723 0.286044 0.826563 0.482394 0.860275 0.64484 0.558213 1.07436
+0.327506 0.986453 0.803782 0.357274 0.516338 1.05745 0.630234 0.497191
+1.2182 0.228912 0.852845 0.84452;
+#X coords 0 1 100 -1 200 140 1;
+#X restore 552 370 graph;
+#X obj 457 385 metro 100;
+#X obj 434 350 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 301 610 dac~;
+#X obj 423 492 tabwrite~ array1;
+#X obj 301 365 *~ 0.5;
+#N canvas 327 320 648 601 flanger-effect 1;
+#X obj 149 242 metro 10;
+#X floatatom 105 150 5 0 0 0 - - -;
+#X obj 311 214 +~ 1;
+#X obj 54 398 +~;
+#X obj 150 264 snapshot~;
+#X obj 311 278 +~ 1;
+#X obj 311 243 *~ 1;
+#X obj 148 220 loadbang;
+#X obj 311 186 osc~ 0.1;
+#X text 355 199 delay magnitude(ms);
+#X text 352 236 delay offset(ms);
+#X text 445 362 feedback amount;
+#X obj 161 114 vsl 12 50 0.001 1 0 0 empty empty speed -5 -7 1 10 -262144
+-1 -1 4900 1;
+#X obj 48 54 inlet~;
+#X obj 398 362 *~ 0.5;
+#X obj 193 114 vsl 12 50 0 10 0 0 empty empty offset -5 -7 1 10 -262144
+-1 -1 3900 1;
+#X obj 227 114 vsl 12 50 0 20 0 0 empty empty delay -5 -7 1 10 -262144
+-1 -1 4400 1;
+#X obj 259 114 vsl 12 50 0 0.99 0 0 empty empty feedback -5 -7 1 10
+-262144 -1 -1 1800 1;
+#X obj 132 45 inlet;
+#X obj 164 53 inlet;
+#X obj 107 77 s \$0-osc;
+#X obj 311 153 r \$0-osc;
+#X obj 164 77 s \$0-off;
+#X obj 358 255 r \$0-off;
+#X obj 221 53 inlet;
+#X obj 221 77 s \$0-del;
+#X obj 357 215 r \$0-del;
+#X obj 279 52 inlet;
+#X obj 279 77 s \$0-feed;
+#X obj 431 272 r \$0-feed;
+#X obj 156 383 delwrite~ \$0-line 1000;
+#X obj 311 307 vd~ \$0-line;
+#X text 102 103 flanger;
+#X obj 54 427 outlet~;
+#X text 101 128 delay(ms);
+#X text 114 418 In addition to the sliders \, the inlets allow the
+user to fully control the internals of the patch with no range-limits
+;
+#X obj 431 328 expr if($f1 > 1 \, 0.99 \, $f1);
+#X obj 431 305 expr if($f1 < -1 \, -0.99 \, $f1);
+#X connect 0 0 4 0;
+#X connect 2 0 6 0;
+#X connect 3 0 33 0;
+#X connect 4 0 1 0;
+#X connect 5 0 4 0;
+#X connect 5 0 31 0;
+#X connect 6 0 5 0;
+#X connect 7 0 0 0;
+#X connect 8 0 2 0;
+#X connect 12 0 8 0;
+#X connect 13 0 3 0;
+#X connect 13 0 30 0;
+#X connect 14 0 30 0;
+#X connect 15 0 5 1;
+#X connect 16 0 6 1;
+#X connect 17 0 14 1;
+#X connect 18 0 20 0;
+#X connect 19 0 22 0;
+#X connect 21 0 8 0;
+#X connect 23 0 5 1;
+#X connect 24 0 25 0;
+#X connect 26 0 6 1;
+#X connect 27 0 28 0;
+#X connect 29 0 37 0;
+#X connect 31 0 3 1;
+#X connect 31 0 14 0;
+#X connect 36 0 14 1;
+#X connect 37 0 36 0;
+#X restore 378 282 pd flanger-effect;
+#X connect 0 0 6 0;
+#X connect 0 0 7 0;
+#X connect 2 0 5 0;
+#X connect 3 0 2 0;
+#X connect 6 0 4 0;
+#X connect 6 0 5 0;
+#X connect 6 0 4 1;
+#X connect 7 0 6 0;
